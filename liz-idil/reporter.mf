@@ -1,0 +1,15 @@
+CACHE MANIFEST
+# 2014-05-13:v1
+
+#Explicitly cached 'master entries'.
+CACHE:
+index.html
+stylesheet.css
+images/aubLogo.jpg
+scripts/main.js
+http://cdn.example.com/scripts/main.js
+
+#Resource that require the user to be online.
+NETWORK:
+*
+
