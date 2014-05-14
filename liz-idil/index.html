@@ -1,5 +1,5 @@
 <!doctype html>
-<html manifest="reporter.mf">
+<html manifest="reporter.appcache">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,8 +59,18 @@
 
             </section>
 
+
           </article>
+
        </main>
+       <aside>
+
+        <h1>Storage Demo</h1>
+
+        <p>Text is automatically saved with every input. By refreshing, quitting and relaunching the browswer your text is still there. <span id="idCaveat"></span> </p>
+        <textarea id="idTextarea"></textarea>
+      </aside>
+
        <footer>
          <a href="http://www.auburn-reporter.com/terms_of_use/">Terms of Use</a>
          <a href="http://www.auburn-reporter.com/privacy/">Privacy</a>
@@ -70,10 +80,30 @@
 
 
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+
+      <script>
+
+      function savetext () {
+        var s = document.getElementById ("idTextarea").value;
+        if (s != localStorage.savedtext) {
+          localStorage.savedtext = s;
+          }
+        document.getElementById ("idCharCount").innerHTML = s.length;
+        }
+      function startup () {
+        if (typeof (Storage) == undefined) {
+          document.getElementById ("idCaveat").innerHTML = ", which unfortunately is not available in this browser";
+          }
+        else {
+          if (localStorage.savedtext == undefined) {
+            localStorage.savedtext = "";
+            }
+          document.getElementById ("idTextarea").value = localStorage.savedtext;
+          self.setInterval (function () {savetext ()}, 1000); //call every second
+          }
+        }
+      </script>
+
 
     </body>
 </html>
